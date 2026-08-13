@@ -94,7 +94,7 @@ export function Footer() {
           <div className="flex flex-col items-center justify-center gap-3">
             <MadeWithLoveBadge />
             <p className="text-xs opacity-50">
-              © {year} {restaurantInfo.name}. {openingHours.length} días de horario publicado.
+              © {year} {restaurantInfo.name}.
             </p>
           </div>
         </div>

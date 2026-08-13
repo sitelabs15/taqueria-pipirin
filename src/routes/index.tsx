@@ -128,7 +128,7 @@ function StackCard({
   return (
     <div
       style={{ zIndex }}
-      className={`sticky top-0 overflow-hidden rounded-t-[24px] md:rounded-t-[36px] border-t border-border-strong/60 ${bgColor} shadow-[0_-16px_40px_rgba(0,0,0,0.9)]`}
+      className={`relative md:sticky md:top-0 -mt-6 md:mt-0 overflow-hidden rounded-t-[28px] md:rounded-t-[36px] border-t border-border-strong/60 ${bgColor} shadow-[0_-16px_40px_rgba(0,0,0,0.9)]`}
     >
       {/* Fotografía de Puebla de fondo visible en segundo plano */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
