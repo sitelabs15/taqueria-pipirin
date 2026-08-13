@@ -1,0 +1,365 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * TAQUERÍA EL PIPIRÍN — sistema de diseño
+ * Paleta poblana: crema maíz, hueso, rojo chile, verde poblano, café carbón.
+ * Todos los colores en oklch. Nunca usar clases de color crudas en componentes.
+ */
+
+@theme inline {
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-bone: var(--bone);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-maize: var(--maize);
+  --color-ink: var(--ink);
+  --color-night: var(--night);
+  --color-night-foreground: var(--night-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 4px;
+
+  --background: #1A1924; /* color oscuro del footer */
+  --bone: #232130; /* superficie ligeramente más clara para tarjetas y secciones */
+  --foreground: #FAF6ED; /* hueso / marfil cálido para textos principales */
+  --ink: #FAF6ED;
+
+  --card: #232130;
+  --card-foreground: #FAF6ED;
+  --popover: #232130;
+  --popover-foreground: #FAF6ED;
+
+  --primary: #D99B26; /* maíz / oro poblano cálido */
+  --primary-foreground: #14131D;
+  --primary-deep: #B8811C;
+
+  --secondary: #314936; /* verde poblano oscuro */
+  --secondary-foreground: #FAF6ED;
+
+  --muted: #2C293A;
+  --muted-foreground: #B5B0A6;
+
+  --accent: #D99B26; /* maíz / oro poblano */
+  --accent-foreground: #14131D;
+  --maize: #D99B26;
+
+  --night: #14131D; /* negro cálido aún más profundo */
+  --night-foreground: #FAF6ED;
+
+  --destructive: #B8811C;
+  --destructive-foreground: #14131D;
+
+  --border: rgba(250, 246, 237, 0.14);
+  --border-strong: rgba(250, 246, 237, 0.28);
+  --input: rgba(250, 246, 237, 0.20);
+  --ring: #D99B26;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01";
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 0.98;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------- utilidades editoriales ---------- */
+
+@utility shell {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (width >= 768px) {
+    padding-inline: 32px;
+  }
+  @media (width >= 1024px) {
+    padding-inline: 48px;
+  }
+  @media (width >= 1440px) {
+    padding-inline: 64px;
+  }
+}
+
+@utility section-y {
+  padding-block: 64px;
+  @media (width >= 768px) {
+    padding-block: 96px;
+  }
+  @media (width >= 1024px) {
+    padding-block: 132px;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  @media (width >= 768px) {
+    font-size: 12px;
+  }
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@utility rule-line {
+  height: 1px;
+  width: 100%;
+  background: var(--color-border-strong);
+}
+
+/* Botones de marca */
+@utility btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding-inline: 26px;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+  & svg {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:hover svg {
+    transform: translateX(3px);
+  }
+  &:active {
+    transform: scale(0.985);
+  }
+}
+
+@utility btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  &:hover {
+    background: var(--color-primary-deep);
+  }
+}
+
+@utility btn-outline {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: currentColor;
+  &:hover {
+    background: color-mix(in oklab, currentColor 10%, transparent);
+  }
+}
+
+@utility nav-link {
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover::after,
+  &[aria-current="true"]::after {
+    transform: scaleX(1);
+  }
+}
+
+/* Reveals */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@utility line-mask {
+  overflow: hidden;
+  display: block;
+  & > span {
+    display: block;
+    transform: translateY(105%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@utility line-mask-in {
+  & > span {
+    transform: translateY(0);
+  }
+}
+
+@utility img-cover {
+  overflow: hidden;
+  & img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scale(1.06);
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--color-background);
+    transform-origin: right;
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &[data-shown="true"] img {
+    transform: scale(1);
+  }
+  &[data-shown="true"]::before {
+    transform: scaleX(0);
+  }
+}
+
+@utility tile-band {
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in oklab, var(--color-secondary) 55%, transparent) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+/* ---------- keyframes ---------- */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.035);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes line-drop {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
