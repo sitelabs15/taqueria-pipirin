@@ -146,6 +146,8 @@ function StackCard({
   );
 }
 
+import { WhatsAppButton } from "@/components/pipirin/WhatsAppButton";
+
 function Index() {
   return (
     <>
@@ -205,6 +207,7 @@ function Index() {
         </StackCard>
       </main>
       <Footer />
+      <WhatsAppButton />
       <MobileStickyActions />
     </>
   );

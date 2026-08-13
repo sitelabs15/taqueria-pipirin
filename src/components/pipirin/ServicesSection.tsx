@@ -34,19 +34,19 @@ export function ServicesSection() {
                 className="btn-base btn-primary"
               >
                 <Phone size={16} strokeWidth={1.8} aria-hidden="true" />
-                Llamar ahora · {restaurantInfo.phone.display}
+                Llamar · {restaurantInfo.phone.display}
               </a>
-              {restaurantInfo.onlineOrderUrl ? (
-                <a
-                  href={restaurantInfo.onlineOrderUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-analytics="click_order"
-                  className="btn-base btn-outline text-foreground"
-                >
-                  Pedido en línea
-                </a>
-              ) : null}
+              <a
+                href={`https://wa.me/522224868832?text=${encodeURIComponent(
+                  "Hola, quisiera consultar el menú o hacer un pedido en Taquería El Pipirín."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-analytics="click_whatsapp"
+                className="btn-base bg-[#25D366] text-white hover:bg-[#20ba5a] transition-colors"
+              >
+                WhatsApp · {restaurantInfo.phone.display}
+              </a>
             </div>
             <p className="mt-4 max-w-md text-xs text-muted-foreground">{availabilityNotice}</p>
           </Reveal>
